@@ -3,27 +3,30 @@ export default {
         // id: "",
         // genres: "",
         movie: "",
-        likedMovies: []
+        movies: []
     },
     getters: {
         // id: state => state.id,
         movie: state => state.movie,
-        likedMovies: state => state.likedMovies
+        movies: state => state.movies
     },
     mutations: {
         setMovie (state, movie) {
             state.movie = movie
         },
-        setLikedMovie (state, likedMovie) {
-            state.likedMovies.push(likedMovie)
+        setMovies (state, movie) {
+            state.movies.push(movie)
+        },
+        clearMovies (state, movie) {
+            state.movies = movie
         }
     },
     actions: {
         setMovie ({ commit }, movie) {
             commit('setMovie', movie)
         },
-        setLikedMovie ({commit}, likedMovie) {
-            commit('setLikedMovie', likedMovie)
+        setMovies ({commit}, movie) {
+            commit('setMovies', movie)
         }
     }
 }

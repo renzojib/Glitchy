@@ -1,10 +1,9 @@
 <template lang="">
-    <nav class="" :class="{'justify-end': isMobile, 'justify-start': !isMobile }">
-        <div class="" v-if="!isMobile">
-            <a class="">Glitchy</a>
-            <a class="">Find Movie</a>
+    <nav :class="{'justify-end': isMobile, 'justify-start': !isMobile, 'glitchy-find': isMobile }">
+        <div class="glitchy-find">
+            <a class="logo" @click="navigateTo">Home</a>
         </div>
-        <img src="" alt="menu" v-if="isMobile" class="navig-m"/>
+        <!-- <img :src="require('@/assets/menu.png')" alt="menu" v-if="isMobile" class="nav-img"/> -->
     </nav>
 </template>
 <script>
@@ -27,9 +26,12 @@ export default {
       onResize () {
         this.isMobile = window.innerWidth < 960
       },
+      navigateTo () {
+        this.$router.go()
+      }
     },
 }
 </script>
 <style scoped>
-    
+@import "@/styles/AppHeader.css";    
 </style>

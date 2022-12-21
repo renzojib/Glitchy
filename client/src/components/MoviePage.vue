@@ -1,9 +1,11 @@
 <template lang="">
-    <h1>
-        {{$store.getters.movie.title}}
-    </h1>
-    <img :src="poster"/>
-    <p>{{$store.getters.movie.overview}}</p>
+    <div class="view-movie">
+        <img :src="poster"/>
+        <h1>
+            {{$store.getters.movie.title}}
+        </h1>
+        <p>{{$store.getters.movie.overview}}</p>
+    </div>
 </template>
 <script>
 export default {
@@ -21,6 +23,6 @@ export default {
     }
 }
 </script>
-<style lang="">
-    
+<style scoped>
+@import "@/styles/MoviePage.css";
 </style>

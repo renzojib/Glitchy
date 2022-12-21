@@ -1,0 +1,30 @@
+nav {
+    display: inline-block;
+    background-color: transparent;
+    height: 60px;
+  }
+  .glitchy-find {
+    background-color: transparent;
+    display: flex;
+    height: 60px;
+    width: 30%;
+    margin: 20px 0 0 30px;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .logo {
+    background-color: transparent;
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .nav-img {
+    margin: 20px 30px 0 0;
+    width: 40px;
+  }
+  @media screen and (max-device-width: 640px) {
+    .glitchy-find {
+        margin: 20px 0 0 20px;
+    }
+  }
