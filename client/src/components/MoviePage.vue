@@ -1,6 +1,6 @@
 <template lang="">
     <div class="view-movie">
-        <img :src="poster"/>
+        <img v-if="showImg" :src="poster"/>
         <h1>
             {{$store.getters.movie.title}}
         </h1>
@@ -11,12 +11,13 @@
 export default {
     data () {
         return {
-            poster: ""
+            poster: "",
+            showImg: true,
         }
     },
     created () {
         if (this.$store.getters.movie === "") {
-            this.$router.replace({name: 'home'})
+            this.showImg = false
         } else {
             this.poster = `https://image.tmdb.org/t/p/original/${this.$store.getters.movie.poster_path}`
         }

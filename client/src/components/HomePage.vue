@@ -24,15 +24,11 @@ export default {
     intervalId: "",
   }),
   watch: {
-    id: function (newValue) {
-      clearInterval(this.intervalId)
-      if (newValue !== "") {
-        this.getTwoMoviesInfo()
-        this.intervalId = setInterval(this.getTwoMoviesInfo, 10000)
-      }
+    id: function () {
+      this.getTwoMoviesInfo()
     }
   },
-  mounted () {
+  created () {
     this.getGenres()
   },
   methods: {

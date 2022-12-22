@@ -18,7 +18,6 @@ export default {
 
     mounted () {
       this.onResize()
-
       window.addEventListener('resize', this.onResize, { passive: true })
     },
 
@@ -27,7 +26,7 @@ export default {
         this.isMobile = window.innerWidth < 960
       },
       navigateTo () {
-        this.$router.go()
+        this.$router.push({name: 'home'})
       }
     },
 }
