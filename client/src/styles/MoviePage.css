@@ -7,12 +7,12 @@
 }
 
 .view-movie img {
-    width: 40vw;
-    height: 50vh;
+    width: 80%;
 }
 
 .view-movie h1 {
     font-size: 2rem;
+    font-weight: 600;
     margin-top: 30px;
 }
 .view-movie p {
@@ -27,13 +27,13 @@
         align-items: center;
         margin: 40px auto 0;
         width: 70vw;
-        height: 100vh;
     }
 
-    .view-movie img {
-        width: 60vw;
+    .view-movie h1 {
+        font-size: 1.2rem;
     }
+
     .view-movie p {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
 }

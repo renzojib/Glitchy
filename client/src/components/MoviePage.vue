@@ -1,25 +1,35 @@
 <template lang="">
     <div class="view-movie">
-        <img v-if="showImg" :src="poster"/>
-        <h1>
-            {{$store.getters.movie.title}}
+        <img v-if="!show" />
+        <img v-if="show" :src="'https://image.tmdb.org/t/p/original/' + movie.poster_path"/>
+        <h1 v-if="show">
+            {{movie.title}}
         </h1>
-        <p>{{$store.getters.movie.overview}}</p>
+        <p v-if="show">{{movie.overview}}</p>
     </div>
 </template>
 <script>
 export default {
     data () {
         return {
-            poster: "",
-            showImg: true,
+            show: true,
+            timer: "",
+            movie: "",
         }
     },
-    created () {
-        if (this.$store.getters.movie === "") {
-            this.showImg = false
-        } else {
-            this.poster = `https://image.tmdb.org/t/p/original/${this.$store.getters.movie.poster_path}`
+    mounted () {
+        if(!this.$store.getters.id) {
+            this.$router.push({ name:'home' })
+        }
+        this.getMovieInfo()
+    },
+    beforeUnmount() {
+        clearTimeout(this.timer)
+    },
+    methods: {
+        async getMovieInfo () {
+            const movie = await this.$store.dispatch('getRandom')
+            this.movie = await this.$store.dispatch('getMovieInfo', movie)
         }
     }
 }
