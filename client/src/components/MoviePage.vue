@@ -5,6 +5,10 @@
             {{movie.title}}
         </h1>
         <p v-if="show">{{movie.overview}}</p>
+        <div>
+            <button @click="getMovieInfo">Next Choice</button>
+            <button @click="pushToHome">Change genre</button>
+        </div>
     </div>
 </template>
 <script>
@@ -18,28 +22,18 @@ export default {
     },
     created () {
         this.show = false
-        if (this.$store.getters.id) {
-            this.getMovieInfo()
-        } 
-    },
-    beforeCreate () {
-        if (!this.$store.getters.id) {
-            this.$router.push({ name:'home' })
-        }
+        this.getMovieInfo()
     },
     methods: {
         async getMovieInfo () {
             const movie = await this.$store.dispatch('getRandom')
+            console.log(movie)
             this.movie = await this.$store.dispatch('getMovieInfo', movie)
             this.show = true
         },
-
         pushToHome () {
-            if(!this.$store.getters.id) {
-                console.log(2)
-              this.$router.push({ name:'home' })
-            }
-        }
+            this.$router.push({ name:'home' })
+        },
     }
 }
 </script>

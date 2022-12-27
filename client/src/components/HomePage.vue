@@ -29,9 +29,9 @@ export default {
     movies: [],
   }),
   watch: {
-    id: async function (value) {
-      this.$store.commit('setId', this.id)
-      await this.$store.dispatch('getMovies', value, this.page)
+    id: async function () {
+      await this.$store.commit('setId', this.id)
+      await this.$store.dispatch('getMovies', localStorage.getItem('id'), this.page)
       this.getMoviesInfo()
     }
   },

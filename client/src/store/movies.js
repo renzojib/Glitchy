@@ -1,7 +1,6 @@
 import axios from 'axios'
 export default {
     state: {
-        id: "",
         genres: "",
         movieInfo: "",
         movies: [],
@@ -14,8 +13,8 @@ export default {
         genres: state => state.genres,
     },
     mutations: {
-        setId (state, id) {
-          state.id = id
+        setId (id) {
+          localStorage.setItem('id', id)
         },
         setMovies (state, movies) {
             state.movies = movies
