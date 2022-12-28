@@ -1,13 +1,16 @@
 <template lang="">
-    <div class="view-movie">
+    <div ref="view" class="view-movie" :class="{ 'v-height': !show}">
+        <div v-if="!show" class="load-container">
+            <div class="load"></div>
+        </div>
         <img v-if="show" :src="movieImg"/>
         <h1 v-if="show">
             {{movie.title}}
         </h1>
         <p v-if="show">{{movie.overview}}</p>
         <div>
-            <button @click="getMovieInfo">Next Choice</button>
-            <button @click="pushToHome">Change genre</button>
+            <button v-if="show" @click="getMovieInfo">Next Choice</button>
+            <button v-if="show" @click="pushToHome">Change genre</button>
         </div>
     </div>
 </template>
@@ -28,8 +31,10 @@ export default {
     },
     created: async function () {
         await this.$store.dispatch('getMovies', localStorage.getItem('id'), this.page)
-        this.getMovieInfo()
-        this.show = true
+        setTimeout(() => {
+            this.getMovieInfo()
+            this.show = true
+        },3000)
     },
     methods: {
         randomPage () {

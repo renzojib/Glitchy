@@ -1,8 +1,8 @@
 <template>
   <div class="home-page">
-    <h1>Let Glitchy Choose</h1>
+    <label for="select">Pick a genre</label>
     <div class="forms">
-      <select v-model="id" ref="sel">
+      <select id="sel" v-model="id" ref="sel">
         <option v-for="genre in $store.getters.genres" :value="genre.id" :key="genre.id">{{genre.name}}</option>
       </select>
       <button @click="goToMovie">Glitchy's Choice</button>

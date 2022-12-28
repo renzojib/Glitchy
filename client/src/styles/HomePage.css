@@ -5,28 +5,30 @@
     align-items: center;
 }
 
-.home-page h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 30px;
+select, button {
+    font-family: inherit;
+}
+
+.home-page label {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 .home-page p {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .forms {
-    width: 50%;
+    width: max(50%, 400px);
     margin: 10px 10px 0 0;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
 .forms select {
-    width: 65%;
+    width: max(40%, 200px);
     height: 30px;
     margin-right: 10px;
     border: 2px solid #16455a;
@@ -42,7 +44,7 @@
 .forms button {
     background-color: #16455a;
     color: #FFF;
-    width: 25%;
+    width: max(20%, 115px);
     height: max(30px, 3vh);
     border: 2px solid #16455a;
     border-radius: 10px;
@@ -53,7 +55,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 80vw;
+    width: 60vw;
     margin-top: 10vh;
 }
 
@@ -73,6 +75,13 @@
     margin-right: 5%;
 }
 
+.movies .movie-div h1{
+    width: auto;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 .movies .movie-div:nth-child(2n) img {
     width: 30%;
     height: 100%;
@@ -87,7 +96,6 @@
 
     .home-page h1 {
         font-size: 1.2rem;
-        margin-bottom: 20px;
         word-wrap: break-word;
     }
 

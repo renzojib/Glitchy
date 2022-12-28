@@ -1,7 +1,7 @@
 <template lang="">
-    <nav :class="{'justify-end': isMobile, 'justify-start': !isMobile, 'glitchy-find': isMobile }">
+    <nav :class="{'justify-end': isMobile, 'justify-start': !isMobile }">
         <div class="glitchy-find">
-            <a class="logo" @click="navigateTo">Home</a>
+            <a class="logo" @click="navigateTo"><img src="@/assets/logo.png" /></a>
         </div>
         <!-- <img :src="require('@/assets/menu.png')" alt="menu" v-if="isMobile" class="nav-img"/> -->
     </nav>

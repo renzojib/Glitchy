@@ -1,23 +1,28 @@
 .view-movie {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin: 40px auto 0;
     width: 50vw;
 }
 
+.v-height {
+    height: 80vh;
+}
+
 .view-movie img {
-    width: 80%;
+    width: 50%;
 }
 
 .view-movie h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-top: 30px;
 }
 .view-movie p {
     margin-top: 20px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .view-movie div {
@@ -30,13 +35,51 @@
 button {
     background-color: #16455a;
     color: #FFF;
-    width: 25%;
+    width: max(20%, 115px);
     height: max(30px, 3vh);
     border: 2px solid #16455a;
     border-radius: 10px;
     cursor: pointer;
 }
 
+div.load-container {
+    margin: 0;
+    position: relative;
+    display: block;
+    height: 30px;
+    width: 40%;
+    border: 10px solid #16455a;
+    border-radius: 15px;
+}
+
+div.load {
+    margin: 0;
+    display: block;
+    position: absolute;
+    background-color: #ffffff;
+    width: 0px;
+    height: 10px;
+    border-radius: 15px;
+    animation: load-anim 3s infinite linear;
+}
+
+@keyframes load-anim {
+    0%{
+        width: 0%;
+    }
+    25%{
+        width: 50%;
+    }
+    50%{
+        width: 75%;
+    }
+    75%{
+        width: 85%;
+    }
+    100%{
+        width: 100%;
+    }
+}
 
 @media screen and (max-device-width: 960px) {
     .view-movie {
