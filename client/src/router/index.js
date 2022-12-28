@@ -12,7 +12,11 @@ const routes = [
     path: '/movie',
     name: 'movie',
     component: MovieView
-  }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: HomeView
+  },
 ]
 
 const router = createRouter({
