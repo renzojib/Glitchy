@@ -31,6 +31,7 @@
     margin-right: 10px;
     border: 2px solid #16455a;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .forms select > option {
@@ -105,7 +106,7 @@
     }
     
     .forms button {
-        font-size: 12px;
+        font-size: .7rem;
         width: max(20%, 100px);
     }
 

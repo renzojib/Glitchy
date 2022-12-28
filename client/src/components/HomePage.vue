@@ -1,11 +1,11 @@
 <template>
   <div class="home-page">
-    <h1 ref="testing" class="">Let Glitchy Choose</h1>
+    <h1>Let Glitchy Choose</h1>
     <div class="forms">
-      <select v-model="id" class="">
+      <select v-model="id" ref="sel">
         <option v-for="genre in $store.getters.genres" :value="genre.id" :key="genre.id">{{genre.name}}</option>
       </select>
-      <button @click="goToMovie">Random Movie</button>
+      <button @click="goToMovie">Glitchy's Choice</button>
     </div>
     <div class="movies">
       <div class="movie-div" v-for="movie in movies" :key="movie.id">
@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     goToMovie () {
+      if (!this.$refs.sel.value) {return}
       this.$router.push({name: 'movie'})
     },
     async getUniqueMovies () {
