@@ -20,14 +20,21 @@ select, button {
 
 .forms {
     width: max(50%, 400px);
-    margin: 10px 10px 0 0;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-.forms select {
+.forms div {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forms select, .forms input {
     width: max(40%, 200px);
     height: 30px;
     margin-right: 10px;
@@ -103,13 +110,22 @@ select, button {
         font-size: 1rem;
     }
 
+    .home-page label {
+        font-size: 1.1rem;
+        font-weight: 400;
+    }
+
     .forms {
         width: 100%;
         justify-content: center;
     }
     
+    .forms div {
+        width: 90%;
+    }
+    
     .forms select {
-        width: max(65%, 200px);
+        width: max(55%, 150px);
         height: 30px;
     }
     

@@ -1,6 +1,9 @@
 import axios from 'axios'
 export default {
     state: {
+        id: "",
+        sort: "popularity.desc",
+        page: 1,
         genres: "",
         movieInfo: "",
         movies: [],
@@ -13,8 +16,17 @@ export default {
         genres: state => state.genres,
     },
     mutations: {
-        setId (id) {
-          localStorage.setItem('id', id)
+        setId (state, id) {
+          state.id = id
+          localStorage.setItem('id', id.toString())
+        },
+        setSort (state, sort) {
+          state.sort = sort
+          localStorage.setItem('sort', sort)
+        },
+        setPage (state, page) {
+          state.page = page
+          localStorage.setItem('page', page.toString())
         },
         setMovies (state, movies) {
             state.movies = movies
@@ -42,9 +54,12 @@ export default {
               console.log(error)
             }
         },
-        async getMovies ({ commit }, id, page) {
+        async getMovies ({ state, commit }) {
+            const newId = state.id || localStorage.getItem('id')
+            const newSort = state.sort || localStorage.getItem('sort')
+            const newPage = state.page || localStorage.getItem('page')
             const discoverMovieEndpoint = '/discover/movie';
-            const requestParams = `?api_key=${process.env.VUE_APP_TMDB_API_KEY}&page=${page}&with_genres=${id}`
+            const requestParams = `?api_key=${process.env.VUE_APP_TMDB_API_KEY}&page=${newPage}&with_genres=${newId}&sort_by=${newSort}`
             const urlToFetch = process.env.VUE_APP_TMDB_BASEURL+discoverMovieEndpoint+requestParams;
             try {
               const response = await axios.get(urlToFetch);

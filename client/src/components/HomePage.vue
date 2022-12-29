@@ -1,10 +1,29 @@
 <template>
   <div class="home-page">
-    <label for="select">Pick a genre</label>
     <div class="forms">
-      <select id="sel" v-model="id" ref="sel">
-        <option v-for="genre in $store.getters.genres" :value="genre.id" :key="genre.id">{{genre.name}}</option>
-      </select>
+      <div>
+        <label for="genre">Pick a genre:</label>
+        <select id="genre" v-model="id" ref="sel">
+          <option v-for="genre in $store.getters.genres" :value="genre.id" :key="genre.id">{{genre.name}}</option>
+        </select>
+      </div>
+      <div v-if="id">
+        <label for="sort">Sort by:</label>
+        <select v-model="sort" id="sort">
+          <option value="popularity.asc">popularity ascending</option>
+          <option value="popularity.desc">popularity descending</option>
+          <option value="release_date.asc">release date ascending</option>
+          <option value="release_date.desc">release date descending</option>
+          <option value="vote_average.asc">vote average ascending</option>
+          <option value="vote_average.desc">vote average descending</option>
+          <option value="original_title.asc">title ascending</option>
+          <option value="original_title.desc">title descending</option>
+        </select>
+      </div>
+      <div v-if="id">
+        <label for="page">Page to choose from:</label>
+        <input v-model="page" type="number" min="0" max="500" id="page"/>
+      </div>
       <button @click="goToMovie">Glitchy's Choice</button>
     </div>
     <div class="movies">
@@ -25,18 +44,28 @@ export default {
 
   data: () => ({
     id: "",
-    page: 10,
+    sort: "",
+    page: "",
     movies: [],
   }),
   watch: {
-    id: async function () {
-      await this.$store.commit('setId', this.id)
-      await this.$store.dispatch('getMovies', localStorage.getItem('id'), this.page)
+    id: async function (newValue) {
+      await this.$store.commit('setId', newValue)
+      this.sort = "popularity.desc"
+      this.page = 1
+      await this.$store.dispatch('getMovies', newValue)
       this.getMoviesInfo()
-    }
+    },
+    sort: async function (newValue) {
+      await this.$store.commit('setSort', newValue)
+    },
+    page: async function (newValue) {
+      await this.$store.commit('setPage', newValue)
+    },
   },
-  mounted () {
-    this.$store.dispatch('getGenres')
+  mounted: async function () {
+    await this.$store.dispatch('getGenres')
+    this.id = this.getRandomGenreId()
   },
   methods: {
     goToMovie () {
@@ -70,6 +99,9 @@ export default {
         const movie = await this.$store.dispatch('getMovieInfo', movies[i])
         this.movies.push(movie)
       }
+    },
+    getRandomGenreId () {
+      return this.$store.getters.genres[Math.floor(Math.random() * this.$store.getters.genres.length)].id
     }
   }
 }

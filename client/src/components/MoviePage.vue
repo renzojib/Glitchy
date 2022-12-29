@@ -3,7 +3,7 @@
         <div v-if="!show" class="load-container">
             <div class="load"></div>
         </div>
-        <img v-if="show" :src="movieImg"/>
+        <img v-if="show" :src="movieImg" alt="Unfortunately this movie image is missing"/>
         <h1 v-if="show">
             {{movie.title}}
         </h1>
@@ -21,7 +21,6 @@ export default {
             show: false,
             timer: "",
             movie: "",
-            page: 10,
         }
     },
     computed: {
@@ -30,20 +29,16 @@ export default {
         }
     },
     created: async function () {
-        await this.$store.dispatch('getMovies', localStorage.getItem('id'), this.page)
+        await this.$store.dispatch('getMovies')
+        await this.getMovieInfo()
         setTimeout(() => {
-            this.getMovieInfo()
             this.show = true
         },3000)
     },
     methods: {
-        randomPage () {
-            return Math.floor(Math.random() * this.page)
-        },
         async getMovieInfo () {
             const movie = await this.$store.dispatch('getRandom')
             this.movie = await this.$store.dispatch('getMovieInfo', movie)
-            this.show = true
         },
         pushToHome () {
             this.$router.push({ name:'home' })
