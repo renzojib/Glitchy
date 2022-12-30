@@ -5,6 +5,8 @@ export default {
         sort: "popularity.desc",
         page: 1,
         genres: "",
+        language: "",
+        languages: [],
         movieInfo: "",
         movies: [],
     },
@@ -14,6 +16,7 @@ export default {
         twoMovies: state => state.twoMovies,
         movies: state => state.movies,
         genres: state => state.genres,
+        languages: state => state.languages,
     },
     mutations: {
         setId (state, id) {
@@ -36,7 +39,14 @@ export default {
         },
         setGenres (state, genres) {
             state.genres = genres
-        }
+        },
+        setLanguages (state, languages) {
+          state.languages = languages
+        },
+        setLanguage (state, language) {
+          state.language = language
+          localStorage.setItem('language', language)
+        },
     },
     actions: {
         async getGenres ({ commit }) {
@@ -77,10 +87,11 @@ export default {
           const randomMovie = state.movies[randomIndex];
           return randomMovie;
         },
-        async getMovieInfo ({ commit }, movie) {
+        async getMovieInfo ({ state, commit }, movie) {
             const movieId = movie.id;
+            const language = state.language || localStorage.getItem('language') || "en"
             const movieEndpoint = `/movie/${movieId}`;
-            const requestParams = '?api_key=' + process.env.VUE_APP_TMDB_API_KEY + '&append_to_response=videos,images';
+            const requestParams = '?api_key=' + process.env.VUE_APP_TMDB_API_KEY + '&append_to_response=videos,images' + '&language=' + language;
             const urlToFetch = process.env.VUE_APP_TMDB_BASEURL + movieEndpoint + requestParams;
             try {
               const response = await axios(urlToFetch);
@@ -93,5 +104,30 @@ export default {
               console.log(error)
             }
         },
+        async getLanguages ({ commit }) {
+          const languageEndpoint = "/configuration/languages"
+          const requestParams = '?api_key=' + process.env.VUE_APP_TMDB_API_KEY
+          const urlToFetch = process.env.VUE_APP_TMDB_BASEURL + languageEndpoint + requestParams;
+          try {
+            const response = await axios.get(urlToFetch)
+            if (response.status === 200) {
+              const data = response.data.filter((lang) => { return lang.name !== "" && lang.name !== "No Language"}).sort((a, b) => {
+                if (a.iso_639_1 < b.iso_639_1) {
+                  return -1;
+                }
+                if (a.iso_639_1 > b.iso_639_1) {
+                  return 1;
+                }
+                // a must be equal to b
+                return 0;
+              })
+              commit('setLanguages', data)
+              return
+            }
+            throw new Error("getting languages failed")
+          } catch (err) {
+            console.log((err))
+          }
+        }
     }
 }

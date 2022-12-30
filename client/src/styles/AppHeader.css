@@ -1,28 +1,30 @@
-nav {
-    display: inline-block;
-    background-color: transparent;
-    height: 80px;
-  }
-  .glitchy-find {
-    background-color: transparent;
-    display: flex;
-    height: 100%;
-    margin: 20px 0 0 30px;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
+nav.bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
 
-  .logo img {
-    width: max(7%, 80px);
-    cursor: pointer;
-  }
+nav.bar a {
+  display: inline-block;
+  width: max(7%, 80px);
+  margin-left: 20px;
+  cursor: pointer;
+}
 
-  .nav-img {
-    margin: 20px 30px 0 0;
-    width: 40px;
+nav.bar a img {
+  width: max(7%, 80px);
+  cursor: pointer;
+}
+
+nav div {
+  width: fit-content;
+  margin: 0 20px 0 0;
+}
+
+@media screen and (max-device-width: 640px) {
+  img {
+    margin: 0 0 0 20px;
   }
-  @media screen and (max-device-width: 640px) {
-    .glitchy-find {
-        margin: 20px 0 0 20px;
-    }
-  }
+}

@@ -51,7 +51,7 @@ export default {
   watch: {
     id: async function (newValue) {
       await this.$store.commit('setId', newValue)
-      this.sort = "popularity.desc"
+      this.sort = 'popularity.desc'
       this.page = 1
       await this.$store.dispatch('getMovies', newValue)
       this.getMoviesInfo()
